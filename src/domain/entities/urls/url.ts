@@ -15,7 +15,7 @@ export const BuildMakeUrl = (
       url.id = Id.makeId();
     } else {
       if (!Id.isValidId(url.id)) {
-        throw Error("Invalid url ID");
+        throw new Error("Invalid url ID");
       }
     }
 
