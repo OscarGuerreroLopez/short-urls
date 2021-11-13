@@ -8,27 +8,25 @@ import {
 export const BuildMakeUrl = (
   buildMakeUrl: BuildMakeUrlParams
 ): BuildMakeUrlObject => {
-  const makeUrl = (url: Url): UrlEntity => {
+  const makeUrl = (url: Url): Readonly<UrlEntity> => {
     const { Id, ValidateUrl, MakeShortUrl } = buildMakeUrl;
 
     if (!url.id) {
       url.id = Id.makeId();
     } else {
       if (!Id.isValidId(url.id)) {
-        throw Error("Invalid url ID");
+        throw new Error("Invalid url ID");
       }
     }
 
     url.longUrl = ValidateUrl(url.longUrl).href;
 
-    const shortUrl = MakeShortUrl();
+    if (!url.urlCode || !url.shortUrl) {
+      const shortUrl = MakeShortUrl();
 
-    if (!url.urlCode) {
       url.urlCode = shortUrl.urlCode;
-    }
 
-    if (!url.shortUrl) {
-      url.shortUrl = ValidateUrl(`${shortUrl.baseUrl}${shortUrl.urlCode}`).href;
+      url.shortUrl = `${shortUrl.baseUrl}${shortUrl.urlCode}`;
     }
 
     return Object.freeze({
