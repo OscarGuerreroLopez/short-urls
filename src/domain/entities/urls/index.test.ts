@@ -4,7 +4,7 @@ jest.mock("../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",
-    BASEURL: "https://www.tier.app."
+    BASEURL: "tier.app."
   };
   return {
     EnvVars
@@ -34,15 +34,17 @@ jest.mock("shortid", () => {
 describe("Testing url entity", () => {
   it("should return the right entity", () => {
     const url = MakeUrl({
-      longUrl: "https://www.hello.com/howareyou"
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
     });
     expect(url.getUrlCode()).toStrictEqual(littleCode);
     expect(url.getId()).toStrictEqual(uuid);
-    expect(url.getShortUrl()).toStrictEqual("https://www.tier.app.8yzftnxj5/");
-    expect(url.getLongUrl()).toStrictEqual("https://www.hello.com/howareyou");
+    expect(url.getShortUrl()).toStrictEqual("tier.app.8YZfTnxj5");
+    expect(url.getLongUrl()).toStrictEqual(
+      "https://github.com/OscarGuerreroLopez/short-urls"
+    );
   });
 
-  it("should return error", () => {
+  it("should return Invalid URL", () => {
     try {
       MakeUrl({
         longUrl: "hello.com/howareyou"
