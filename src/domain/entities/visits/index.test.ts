@@ -44,4 +44,22 @@ describe("Visits test", () => {
     expect(result.getUrlId()).toStrictEqual(urlId);
     expect(result.getVisits()).toStrictEqual(0);
   });
+
+  it("should return an error", () => {
+    spyIsValidId.mockReturnValueOnce(false);
+    spyMakeId.mockReturnValueOnce(uuid);
+
+    try {
+      MakeVisit({ urlId });
+    } catch (error) {
+      let message = "";
+
+      if (error instanceof Error) {
+        message = error.message;
+      }
+
+      expect(error).toBeInstanceOf(Error);
+      expect(message).toStrictEqual("invalid urlId");
+    }
+  });
 });
