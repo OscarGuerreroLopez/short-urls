@@ -20,8 +20,7 @@ export const AddUrl: Handler = async (request: Request, response: Response) => {
 
     const { shortUrl, longUrl } = await UrlService.addUrl(request.body);
 
-    await VisitService.addVisit({ url: longUrl });
-    const { visits } = await VisitService.listVisits(longUrl);
+    const { visits } = await VisitService.addVisit({ url: longUrl });
 
     return response.status(201).send({
       shortUrl,
