@@ -39,7 +39,6 @@ describe("Visits test", () => {
 
     const result = MakeVisit({ url: urlId });
 
-    expect(spyIsValidId).toHaveBeenCalledTimes(1);
     expect(spyMakeId).toHaveBeenCalledTimes(1);
     expect(result.getId()).toStrictEqual(uuid);
     expect(result.getUrl()).toStrictEqual(urlId);

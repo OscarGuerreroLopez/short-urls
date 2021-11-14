@@ -2,7 +2,7 @@ import { MakeAddUrlParams, AddUrlUseCase } from "./interfaces";
 import { MakeUrl, Url } from "../../entities/urls";
 
 export const MakeAddUrl = ({ DbMethods }: MakeAddUrlParams): AddUrlUseCase => {
-  const addUrl = async (urlInfo: Url): Promise<string> => {
+  const addUrl = async (urlInfo: Url): Promise<Url> => {
     const url = MakeUrl(urlInfo);
 
     const urlExists = await DbMethods.findOne<Url>("urls", {
@@ -10,10 +10,10 @@ export const MakeAddUrl = ({ DbMethods }: MakeAddUrlParams): AddUrlUseCase => {
     });
 
     if (Object.keys(urlExists).length > 0 && urlExists.shortUrl) {
-      return urlExists.shortUrl;
+      return urlExists;
     }
 
-    const urlRecord = {
+    const urlRecord: Url = {
       id: url.getId(),
       urlCode: url.getUrlCode(),
       shortUrl: url.getShortUrl(),
@@ -22,7 +22,7 @@ export const MakeAddUrl = ({ DbMethods }: MakeAddUrlParams): AddUrlUseCase => {
 
     await DbMethods.insert("urls", urlRecord);
 
-    return urlRecord.shortUrl;
+    return urlRecord;
   };
 
   return { addUrl };

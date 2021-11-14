@@ -19,12 +19,6 @@ export const BuildMakeVisits = (
       }
     }
 
-    const isValidUrlId = Id.isValidId(visitParams.url);
-
-    if (!isValidUrlId) {
-      throw new Error("invalid urlId");
-    }
-
     return Object.freeze({
       getId: () => visitParams.id || "",
       getUrl: () => visitParams.url,

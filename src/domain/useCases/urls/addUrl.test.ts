@@ -80,7 +80,12 @@ describe("addUrl usecase test", () => {
       urlCode: "8YZfTnxj5"
     });
 
-    expect(result).toStrictEqual("tier.app.8YZfTnxj5");
+    expect(result).toStrictEqual({
+      id: "1c32f955-312a-472d-97d9-69c075445e46",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
+      shortUrl: "tier.app.8YZfTnxj5",
+      urlCode: "8YZfTnxj5"
+    });
   });
 
   it("should return a short url cause it already exixts", async () => {
@@ -95,7 +100,12 @@ describe("addUrl usecase test", () => {
       longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
     });
 
-    expect(result).toStrictEqual("tier.app.8YZfTnxj5");
+    expect(result).toStrictEqual({
+      id: "1c32f955-312a-472d-97d9-69c075445e46",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
+      shortUrl: "tier.app.8YZfTnxj5",
+      urlCode: "8YZfTnxj5"
+    });
 
     expect(spyDatabaseMethodsInsert).not.toHaveBeenCalled();
   });
