@@ -2,7 +2,7 @@ import { MakeShortUrl } from "./shortId";
 
 const littleCode = "8YZfTnxj5";
 
-jest.mock("./validateEnv.ts", () => {
+jest.mock("../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",

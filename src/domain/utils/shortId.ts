@@ -1,6 +1,6 @@
 import shortid from "shortid";
 
-import { EnvVars } from "./validateEnv";
+import { EnvVars } from "../../utils/validateEnv";
 
 export interface ShortUrl {
   baseUrl: string;

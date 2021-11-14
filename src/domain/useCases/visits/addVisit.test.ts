@@ -5,7 +5,7 @@ import { MakeAddVisit } from "./addVisit";
 // import { VisitServiceMethods } from "./interfaces";
 import { DbAdapter } from "../../../infra/db/db";
 
-jest.mock("../../utils/validateEnv.ts", () => {
+jest.mock("../../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",

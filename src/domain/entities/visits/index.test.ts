@@ -4,7 +4,7 @@ import { Id } from "../../utils";
 const urlId = "1c32f955-312a-472d-97d9-69c075445e46";
 const uuid = "89c860a0-d44b-4806-9234-479f867e3618";
 
-jest.mock("../../utils/validateEnv.ts", () => {
+jest.mock("../../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",

@@ -1,6 +1,6 @@
 import { MakeUrl } from "./index";
 
-jest.mock("../../utils/validateEnv.ts", () => {
+jest.mock("../../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",
