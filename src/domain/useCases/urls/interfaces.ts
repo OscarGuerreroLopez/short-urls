@@ -1,7 +1,7 @@
 import { Url } from "../../entities/urls";
 import { DatabaseMethodsRepo } from "../../../infra/db/databaseMethods";
 
-export type AddUrl = (urlInfo: Url) => Promise<boolean>;
+export type AddUrl = (urlInfo: Url) => Promise<string>;
 
 export interface MakeAddUrlParams {
   DbMethods: DatabaseMethodsRepo;

@@ -4,25 +4,6 @@ import { MakeAddUrl } from "./addUrl";
 import { UrlServiceMethods } from "./interfaces";
 import { DbAdapter } from "../../../infra/db/db";
 
-// jest.mock("../../../infra/db/databaseMethods.ts", () => {
-//   const DatabaseMethods = (): Readonly<{
-//     findOne: <T>(collection: string, where?: IObjectLiteral) => Promise<T>;
-//     insert: (collection: string, where: IObjectLiteral) => Promise<boolean>;
-//   }> => {
-//     const findOne = async <T>(): Promise<T> => {
-//       return <T>{};
-//     };
-
-//     const insert = async (): Promise<boolean> => {
-//       return true;
-//     };
-
-//     return { findOne, insert };
-//   };
-
-//   return { DatabaseMethods };
-// });
-
 jest.mock("../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
@@ -84,8 +65,8 @@ describe("addUrl usecase test", () => {
     spyDatabaseMethodsInsert.mockRestore();
   });
   it("should add a url to the database", async () => {
-    spyDatabaseMethodsFindOne.mockReturnValueOnce({});
-    spyDatabaseMethodsInsert.mockImplementationOnce(() => {
+    spyDatabaseMethodsFindOne.mockResolvedValueOnce({});
+    spyDatabaseMethodsInsert.mockImplementation(() => {
       return true;
     });
     const result = await addUrl({
@@ -99,36 +80,22 @@ describe("addUrl usecase test", () => {
       urlCode: "8YZfTnxj5"
     });
 
-    expect(result).toBeTruthy();
+    expect(result).toStrictEqual("tier.app.8YZfTnxj5");
   });
 
-  it("should return error cause record exists", async () => {
+  it("should return a short url cause it already exixts", async () => {
     spyDatabaseMethodsFindOne.mockReturnValueOnce({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       shortUrl: "tier.app.8YZfTnxj5",
       urlCode: "8YZfTnxj5"
     });
-    spyDatabaseMethodsInsert.mockImplementationOnce(() => {
-      return true;
+
+    const result = await addUrl({
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
     });
 
-    try {
-      await addUrl({
-        longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
-      });
-    } catch (error) {
-      let message = "";
-
-      if (error instanceof Error) {
-        message = error.message;
-      }
-
-      expect(error).toBeInstanceOf(Error);
-      expect(message).toStrictEqual(
-        "URL https://github.com/OscarGuerreroLopez/short-urls already exists"
-      );
-    }
+    expect(result).toStrictEqual("tier.app.8YZfTnxj5");
 
     expect(spyDatabaseMethodsInsert).not.toHaveBeenCalled();
   });

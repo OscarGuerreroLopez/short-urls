@@ -2,7 +2,7 @@ import { ID } from "../../utils";
 
 export interface Visits {
   id?: string;
-  urlId: string;
+  url: string;
   visits?: number;
 }
 

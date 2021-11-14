@@ -37,7 +37,7 @@ describe("Visits test", () => {
     spyIsValidId.mockReturnValueOnce(true);
     spyMakeId.mockReturnValueOnce(uuid);
 
-    const result = MakeVisit({ urlId });
+    const result = MakeVisit({ url: urlId });
 
     expect(spyIsValidId).toHaveBeenCalledTimes(1);
     expect(spyMakeId).toHaveBeenCalledTimes(1);
@@ -51,7 +51,7 @@ describe("Visits test", () => {
     spyMakeId.mockReturnValueOnce(uuid);
 
     try {
-      MakeVisit({ urlId });
+      MakeVisit({ url: urlId });
     } catch (error) {
       let message = "";
 
