@@ -21,9 +21,11 @@ export const AddUrl: Handler = async (request: Request, response: Response) => {
     const result = await UrlService.addUrl(request.body);
 
     await VisitService.addVisit({ url: result.longUrl });
+    const { visits } = await VisitService.listVisits(result.longUrl);
 
     return response.status(201).send({
-      result
+      shortUrl: result.shortUrl,
+      visits
     });
   } catch (error) {
     ErrorHandler({
