@@ -18,13 +18,13 @@ export const AddUrl: Handler = async (request: Request, response: Response) => {
       throw new Error(message);
     }
 
-    const result = await UrlService.addUrl(request.body);
+    const { shortUrl, longUrl } = await UrlService.addUrl(request.body);
 
-    await VisitService.addVisit({ url: result.longUrl });
-    const { visits } = await VisitService.listVisits(result.longUrl);
+    await VisitService.addVisit({ url: longUrl });
+    const { visits } = await VisitService.listVisits(longUrl);
 
     return response.status(201).send({
-      shortUrl: result.shortUrl,
+      shortUrl,
       visits
     });
   } catch (error) {
