@@ -8,7 +8,7 @@ export interface Visits {
 
 export interface VisitsEntity {
   getId: () => string;
-  getUrlId: () => string;
+  getUrl: () => string;
   getVisits: () => number;
 }
 

@@ -53,6 +53,12 @@ export const DatabaseMethods = (
     where: IObjectLiteral = {},
     values: IObjectLiteral
   ) => {
+    console.log(
+      "@@@updateOne called in databaseMethods",
+      collection,
+      where,
+      values
+    );
     const updatedRecord = await database
       .collection(collection)
       .updateOne(where, values);

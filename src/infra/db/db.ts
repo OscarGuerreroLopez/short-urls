@@ -72,11 +72,13 @@ const fakeModel = <T>(collection: T[]): Readonly<InstanceModel> => {
       return true;
     },
     updateOne: (where: Partial<T>, values: IObjectLiteral) => {
+      console.log("@@@updateOne in db called", where, values);
       let item = _.findWhere(collection, where) as T;
 
       item = { ...item, ...values };
 
       const result = _.extend(_.findWhere(collection, where), item);
+      console.log("@@@updateOnein db collection", result);
 
       return result;
     }

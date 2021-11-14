@@ -42,7 +42,7 @@ describe("Visits test", () => {
     expect(spyIsValidId).toHaveBeenCalledTimes(1);
     expect(spyMakeId).toHaveBeenCalledTimes(1);
     expect(result.getId()).toStrictEqual(uuid);
-    expect(result.getUrlId()).toStrictEqual(urlId);
+    expect(result.getUrl()).toStrictEqual(urlId);
     expect(result.getVisits()).toStrictEqual(0);
   });
 
