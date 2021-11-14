@@ -16,13 +16,13 @@ interface InstanceModel {
 
 const dbInstancesModels: Map<string, Readonly<InstanceModel>> = new Map();
 
-const userCollection: IObjectLiteral[] = [];
-const apartmentCollection: IObjectLiteral[] = [];
+const urlCollection: IObjectLiteral[] = [];
+const visitCollection: IObjectLiteral[] = [];
 
 export const DbAdapter = (): Database => {
   if (Array.from(dbInstancesModels.keys()).length === 0) {
-    dbInstancesModels.set("urls", fakeModel(userCollection));
-    dbInstancesModels.set("visits", fakeModel(apartmentCollection));
+    dbInstancesModels.set("urls", fakeModel(urlCollection));
+    dbInstancesModels.set("visits", fakeModel(visitCollection));
   }
 
   return {
@@ -44,14 +44,19 @@ const fakeModel = <T>(collection: T[]): Readonly<InstanceModel> => {
       return Object.assign([], result); // just to make sure noone alters the original value
     },
     findOne: (where: Partial<T>) => {
+      console.log("@@@findOne in db called", where);
+
       const result = _.findWhere(collection, where);
 
       return Object.assign({}, result); // just to make sure noone alters the original value
     },
     insert: (record: T): boolean => {
+      console.log("@@@insert in db called", record);
+
       const newRecord: T[] = [record];
 
       collection = _.union(collection, newRecord);
+      console.log("@@@insert in db collection", collection);
 
       return true;
     },

@@ -30,6 +30,7 @@ describe("Visits test", () => {
 
   afterEach(() => {
     spyIsValidId.mockRestore();
+    spyMakeId.mockRestore();
   });
 
   it("should return the right entity", () => {

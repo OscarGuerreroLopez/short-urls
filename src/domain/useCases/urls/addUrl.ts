@@ -5,18 +5,22 @@ export const MakeAddUrl = ({ DbMethods }: MakeAddUrlParams): AddUrlUseCase => {
   const addUrl = async (urlInfo: Url): Promise<boolean> => {
     const url = MakeUrl(urlInfo);
 
-    const urlExists = await DbMethods.findOne<Url>("urls", { longUrl: url });
+    const urlExists = await DbMethods.findOne<Url>("urls", {
+      longUrl: url.getLongUrl()
+    });
 
     if (Object.keys(urlExists).length > 0) {
-      throw new Error(`URL ${url} already exists`);
+      throw new Error(`URL ${url.getLongUrl()} already exists`);
     }
 
-    const addUrlToDatabase = await DbMethods.insert("urls", {
+    const urlRecord = {
       id: url.getId(),
       urlCode: url.getUrlCode(),
       shortUrl: url.getShortUrl(),
       longUrl: url.getLongUrl()
-    });
+    };
+
+    const addUrlToDatabase = await DbMethods.insert("urls", urlRecord);
 
     return addUrlToDatabase;
   };

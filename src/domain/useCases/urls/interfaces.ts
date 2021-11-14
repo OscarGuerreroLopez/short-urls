@@ -10,3 +10,7 @@ export interface MakeAddUrlParams {
 export interface AddUrlUseCase {
   addUrl: AddUrl;
 }
+
+export interface UrlServiceMethods {
+  addUrl: AddUrl;
+}
