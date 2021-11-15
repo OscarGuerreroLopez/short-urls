@@ -73,16 +73,21 @@ describe("Testing Visits UseCase", () => {
     spyDatabaseMethodsInsert.mockImplementation(() => {
       return true;
     });
-    const result = await addVisit({ url: "http://tier.app/8YZfTnxj5" });
+    const result = await addVisit({
+      url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
+    });
     expect(spyDatabaseMethodsInsert).toHaveBeenCalledWith("visits", {
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: 0
     });
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: 0
     });
   });
@@ -91,6 +96,7 @@ describe("Testing Visits UseCase", () => {
     spyDatabaseMethodsFindOne.mockResolvedValueOnce({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: 2
     });
 
@@ -98,6 +104,7 @@ describe("Testing Visits UseCase", () => {
       return {
         id: "1c32f955-312a-472d-97d9-69c075445e46",
         url: "http://tier.app/8YZfTnxj5",
+        longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
         visits: 3
       };
     });
@@ -106,13 +113,16 @@ describe("Testing Visits UseCase", () => {
 
     expect(spyDatabaseMethodsUpdateOne).toHaveBeenCalledWith(
       "visits",
-      { url: "http://tier.app/8YZfTnxj5" },
+      {
+        url: "http://tier.app/8YZfTnxj5"
+      },
       { visits: 3 }
     );
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: 3
     });
   });
@@ -121,6 +131,7 @@ describe("Testing Visits UseCase", () => {
     spyDatabaseMethodsFindOne.mockResolvedValueOnce({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: undefined
     });
 
@@ -128,21 +139,28 @@ describe("Testing Visits UseCase", () => {
       return {
         id: "1c32f955-312a-472d-97d9-69c075445e46",
         url: "http://tier.app/8YZfTnxj5",
+        longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
         visits: 0
       };
     });
 
-    const result = await addVisit({ url: "http://tier.app/8YZfTnxj5" });
+    const result = await addVisit({
+      url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
+    });
 
     expect(spyDatabaseMethodsUpdateOne).toHaveBeenCalledWith(
       "visits",
-      { url: "http://tier.app/8YZfTnxj5" },
+      {
+        url: "http://tier.app/8YZfTnxj5"
+      },
       { visits: 0 }
     );
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
       url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls",
       visits: 0
     });
   });

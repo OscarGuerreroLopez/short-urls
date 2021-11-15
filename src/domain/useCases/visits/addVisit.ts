@@ -28,6 +28,7 @@ export const MakeAddVisit = ({
     const visitRecord = {
       id: visit.getId(),
       url: visit.getUrl(),
+      longUrl: visit.getLongUrl(),
       visits: visit.getVisits()
     };
 

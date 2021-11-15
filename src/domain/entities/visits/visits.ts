@@ -22,6 +22,7 @@ export const BuildMakeVisits = (
     return Object.freeze({
       getId: () => visitParams.id || "",
       getUrl: () => visitParams.url,
+      getLongUrl: () => visitParams.longUrl || "",
       getVisits: () => visitParams.visits || 0
     });
   };

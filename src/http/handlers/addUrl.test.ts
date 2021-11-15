@@ -21,19 +21,13 @@ describe("AddUrl handler", () => {
     spyVisitService = jest.fn();
     spyVisitService = jest.spyOn(VisitService, "addVisit");
 
-    // const req = {
-    //   body: {
-    //     longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
-    //   }
-    // };
-    // request = mockReq(req);
-    // response = mockRes({
-    //   send: (data: any) => (body = data),
-    //   status: (data: any) => {
-    //     status = data;
-    //     return response;
-    //   }
-    // });
+    const req = {
+      body: {
+        longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
+      }
+    };
+    request = mockReq(req);
+
     response = mockRes({
       send: (data: any) => (body = data),
       status: (data: any) => {
@@ -49,13 +43,6 @@ describe("AddUrl handler", () => {
   });
 
   it("should get Short Url, store visit and return 201", async () => {
-    const req = {
-      body: {
-        longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
-      }
-    };
-    request = mockReq(req);
-
     spyUrlService.mockImplementation(async () => {
       return {
         id: "eac8d9c7-cc17-4bc9-b7d8-409d473e4305",
@@ -68,7 +55,7 @@ describe("AddUrl handler", () => {
     spyVisitService.mockImplementation(async () => {
       return {
         id: "9ff4c713-15bb-4d27-8361-bd9260639a52",
-        url: "https://github.com/OscarGuerreroLopez/short-urls",
+        url: "http://tier.app/8YZfTnxj5",
         visits: 0
       };
     });
@@ -78,17 +65,12 @@ describe("AddUrl handler", () => {
       longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
     });
     expect(spyVisitService).toHaveBeenCalledWith({
-      url: "https://github.com/OscarGuerreroLopez/short-urls"
+      url: "http://tier.app/8YZfTnxj5",
+      longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
     });
     expect(status).toBe(201);
   });
   it("should throw error if required items not there", async () => {
-    const req = {
-      body: {
-        longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
-      }
-    };
-    request = mockReq(req);
     spyUrlService.mockImplementation(async () => {
       throw new Error("I don't want to work today");
     });

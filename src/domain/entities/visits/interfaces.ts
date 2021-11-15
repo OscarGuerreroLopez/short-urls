@@ -3,12 +3,14 @@ import { ID } from "../../utils";
 export interface Visits {
   id?: string;
   url: string;
+  longUrl?: string;
   visits?: number;
 }
 
 export interface VisitsEntity {
   getId: () => string;
   getUrl: () => string;
+  getLongUrl: () => string;
   getVisits: () => number;
 }
 
