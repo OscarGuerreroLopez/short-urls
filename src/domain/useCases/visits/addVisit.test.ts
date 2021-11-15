@@ -59,7 +59,6 @@ describe("Testing Visits UseCase", () => {
     spyDatabaseMethodsFindOne = jest.spyOn(DbMethods, "findOne");
     spyDatabaseMethodsInsert = jest.fn();
     spyDatabaseMethodsInsert = jest.spyOn(DbMethods, "insert");
-
     spyDatabaseMethodsUpdateOne = jest.fn();
     spyDatabaseMethodsUpdateOne = jest.spyOn(DbMethods, "updateOne");
   });
