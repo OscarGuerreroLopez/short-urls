@@ -28,7 +28,6 @@ export const DatabaseMethods = (
     collection: string,
     record: IObjectLiteral
   ): Promise<boolean> => {
-    console.log("@@@insert called in databaseMethods", collection, record);
     return await database.collection(collection).insert(record);
   };
 
@@ -43,8 +42,6 @@ export const DatabaseMethods = (
     collection: string,
     where: IObjectLiteral
   ): Promise<T> => {
-    console.log("@@@findOne called in databaseMethods", collection, where);
-
     return await database.collection(collection).findOne(where);
   };
 
@@ -53,12 +50,6 @@ export const DatabaseMethods = (
     where: IObjectLiteral = {},
     values: IObjectLiteral
   ) => {
-    console.log(
-      "@@@updateOne called in databaseMethods",
-      collection,
-      where,
-      values
-    );
     const updatedRecord = await database
       .collection(collection)
       .updateOne(where, values);

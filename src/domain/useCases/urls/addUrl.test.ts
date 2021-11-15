@@ -1,5 +1,6 @@
 import { DatabaseMethods } from "../../../infra/db/databaseMethods";
 import { MakeAddUrl } from "./addUrl";
+import { MakeFindUrl } from "./findUrl";
 
 import { UrlServiceMethods } from "./interfaces";
 import { DbAdapter } from "../../../infra/db/db";
@@ -39,9 +40,11 @@ const database: Database = DbAdapter();
 const DbMethods = DatabaseMethods(database);
 
 const { addUrl } = MakeAddUrl({ DbMethods });
+const { findUrl } = MakeFindUrl({ DbMethods });
 
 export const UrlService: Readonly<UrlServiceMethods> = {
-  addUrl
+  addUrl,
+  findUrl
 };
 
 describe("addUrl usecase test", () => {

@@ -44,19 +44,14 @@ const fakeModel = <T>(collection: T[]): Readonly<InstanceModel> => {
       return Object.assign([], result); // just to make sure noone alters the original value
     },
     findOne: (where: Partial<T>) => {
-      console.log("@@@findOne in db called", where);
-
       const result = _.findWhere(collection, where);
 
       return Object.assign({}, result); // just to make sure noone alters the original value
     },
     insert: (record: T): boolean => {
-      console.log("@@@insert in db called", record);
-
       const newRecord: T[] = [record];
 
       collection = _.union(collection, newRecord);
-      console.log("@@@insert in db collection", collection);
 
       return true;
     },
@@ -72,13 +67,11 @@ const fakeModel = <T>(collection: T[]): Readonly<InstanceModel> => {
       return true;
     },
     updateOne: (where: Partial<T>, values: IObjectLiteral) => {
-      console.log("@@@updateOne in db called", where, values);
       let item = _.findWhere(collection, where) as T;
 
       item = { ...item, ...values };
 
       const result = _.extend(_.findWhere(collection, where), item);
-      console.log("@@@updateOnein db collection", result);
 
       return result;
     }
