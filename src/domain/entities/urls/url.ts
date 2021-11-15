@@ -26,7 +26,7 @@ export const BuildMakeUrl = (
 
       url.urlCode = shortUrl.urlCode;
 
-      url.shortUrl = `${shortUrl.baseUrl}${shortUrl.urlCode}`;
+      url.shortUrl = `${shortUrl.baseUrl}/${shortUrl.urlCode}`;
     }
 
     return Object.freeze({

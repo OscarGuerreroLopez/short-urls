@@ -9,7 +9,7 @@ jest.mock("../../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",
-    BASEURL: "tier.app."
+    BASEURL: "http://tier.app"
   };
   return {
     EnvVars
@@ -73,16 +73,16 @@ describe("Testing Visits UseCase", () => {
     spyDatabaseMethodsInsert.mockImplementation(() => {
       return true;
     });
-    const result = await addVisit({ url: "tier.app.8YZfTnxj5" });
+    const result = await addVisit({ url: "http://tier.app/8YZfTnxj5" });
     expect(spyDatabaseMethodsInsert).toHaveBeenCalledWith("visits", {
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: 0
     });
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: 0
     });
   });
@@ -90,29 +90,29 @@ describe("Testing Visits UseCase", () => {
   it("should return the updated visit entity", async () => {
     spyDatabaseMethodsFindOne.mockResolvedValueOnce({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: 2
     });
 
     spyDatabaseMethodsUpdateOne.mockImplementation(() => {
       return {
         id: "1c32f955-312a-472d-97d9-69c075445e46",
-        url: "tier.app.8YZfTnxj5",
+        url: "http://tier.app/8YZfTnxj5",
         visits: 3
       };
     });
 
-    const result = await addVisit({ url: "tier.app.8YZfTnxj5" });
+    const result = await addVisit({ url: "http://tier.app/8YZfTnxj5" });
 
     expect(spyDatabaseMethodsUpdateOne).toHaveBeenCalledWith(
       "visits",
-      { url: "tier.app.8YZfTnxj5" },
+      { url: "http://tier.app/8YZfTnxj5" },
       { visits: 3 }
     );
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: 3
     });
   });
@@ -120,29 +120,29 @@ describe("Testing Visits UseCase", () => {
   it("should return the updated visit entity with zero visits if undefined", async () => {
     spyDatabaseMethodsFindOne.mockResolvedValueOnce({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: undefined
     });
 
     spyDatabaseMethodsUpdateOne.mockImplementation(() => {
       return {
         id: "1c32f955-312a-472d-97d9-69c075445e46",
-        url: "tier.app.8YZfTnxj5",
+        url: "http://tier.app/8YZfTnxj5",
         visits: 0
       };
     });
 
-    const result = await addVisit({ url: "tier.app.8YZfTnxj5" });
+    const result = await addVisit({ url: "http://tier.app/8YZfTnxj5" });
 
     expect(spyDatabaseMethodsUpdateOne).toHaveBeenCalledWith(
       "visits",
-      { url: "tier.app.8YZfTnxj5" },
+      { url: "http://tier.app/8YZfTnxj5" },
       { visits: 0 }
     );
 
     expect(result).toStrictEqual({
       id: "1c32f955-312a-472d-97d9-69c075445e46",
-      url: "tier.app.8YZfTnxj5",
+      url: "http://tier.app/8YZfTnxj5",
       visits: 0
     });
   });

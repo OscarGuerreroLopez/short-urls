@@ -8,7 +8,7 @@ jest.mock("../../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",
-    BASEURL: "tier.app."
+    BASEURL: "http://tier.app"
   };
   return {
     EnvVars

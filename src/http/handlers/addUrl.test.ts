@@ -60,7 +60,7 @@ describe("AddUrl handler", () => {
       return {
         id: "eac8d9c7-cc17-4bc9-b7d8-409d473e4305",
         urlCode: "uvwBM5e6W",
-        shortUrl: "tier.app.uvwBM5e6W",
+        shortUrl: "http://tier.app/8YZfTnxj5",
         longUrl: "https://github.com/OscarGuerreroLopez/short-urls"
       };
     });

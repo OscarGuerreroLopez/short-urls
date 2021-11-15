@@ -6,7 +6,7 @@ jest.mock("../../utils/validateEnv.ts", () => {
   const EnvVars = {
     NODE_ENV: "development",
     PORT: "5000",
-    BASEURL: "tier.app."
+    BASEURL: "http://tier.app"
   };
   return {
     EnvVars
@@ -24,7 +24,7 @@ describe("ShortId tests", () => {
     const result = MakeShortUrl();
 
     expect(result).toStrictEqual({
-      baseUrl: "tier.app.",
+      baseUrl: "http://tier.app",
       urlCode: "8YZfTnxj5"
     });
   });
