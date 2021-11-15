@@ -8,7 +8,7 @@
     "start:dev": "nodemon",
     "start:tsnode": "npm run lint-and-fix && ts-node-dev --respawn src/index.ts",
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js",
+    "start": "npm run build && node dist/index.js",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
