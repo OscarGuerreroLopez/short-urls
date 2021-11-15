@@ -1,6 +1,6 @@
 import { Handler, Response, Request } from "express";
 import { validationResult } from "express-validator";
-import { ErrorHandler, Severity, SanitiseBody } from "../../utils";
+import { ErrorHandler, Severity } from "../../utils";
 import { UrlService } from "../../domain/useCases/urls";
 import { VisitService } from "../../domain/useCases/visits";
 
@@ -36,7 +36,7 @@ export const AddUrl: Handler = async (request: Request, response: Response) => {
         severity: Severity.WARN,
         identifier: "AddUrl handler",
         code: request.code,
-        body: SanitiseBody(request.body),
+        body: request.body,
         headers: request.headers
       }
     });
