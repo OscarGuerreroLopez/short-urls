@@ -16,6 +16,8 @@ export const ValidatorMiddleware = (
       message += `${err.msg || ""} ,`;
     });
 
+    console.log("@@@111", message);
+
     ErrorHandler({
       error: new Error(message),
       additionalErrorInfo: {
@@ -23,12 +25,13 @@ export const ValidatorMiddleware = (
         identifier: "Validator Middleware",
         code: request.code,
         body: request.body,
-        headers: request.headers
+        headers: request.headers,
+        url: request.url
       }
     });
 
     return response.status(400).send({
-      message: "URL cannot be registered, check logs",
+      message: "Wrong params, check logs",
       errorCode: request.code
     });
   }
