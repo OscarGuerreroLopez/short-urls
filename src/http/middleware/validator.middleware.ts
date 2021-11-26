@@ -16,8 +16,6 @@ export const ValidatorMiddleware = (
       message += `${err.msg || ""} ,`;
     });
 
-    console.log("@@@111", message);
-
     ErrorHandler({
       error: new Error(message),
       additionalErrorInfo: {
