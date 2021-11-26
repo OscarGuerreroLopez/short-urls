@@ -7,6 +7,7 @@ import { UrlService } from "../../domain/useCases/urls";
 import { VisitService } from "../../domain/useCases/visits";
 import * as ErrorHandler from "../../utils/errorHandler";
 
+// Avoid writing to logs during testing
 jest.mock("../../utils/logger.ts", () => {
   enum Severity {
     INFO = "info",
