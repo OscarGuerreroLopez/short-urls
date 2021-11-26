@@ -42,7 +42,7 @@ export const AddUrl: Handler = async (request: Request, response: Response) => {
     });
 
     return response.status(500).send({
-      message: "URLcannot be registered, check logs",
+      message: "URL cannot be registered, check logs",
       errorCode: request.code
     });
   }
