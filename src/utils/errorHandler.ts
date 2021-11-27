@@ -6,6 +6,7 @@ export interface AdditionalErrorInfo {
   code?: string;
   body?: IObjectLiteral;
   headers?: IObjectLiteral;
+  url?: string;
 }
 
 export interface ErrorHandlerParams {
@@ -36,6 +37,7 @@ export const ErrorHandler = ({
     code: additionalErrorInfo.code || null,
     body: SanitiseBody(additionalErrorInfo.body || {}),
     headers: additionalErrorInfo.headers || null,
+    url: additionalErrorInfo.url || null,
     stack,
     ...rest
   });
